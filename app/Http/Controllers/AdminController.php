@@ -16,4 +16,9 @@ class AdminController extends Controller
     {
         return view('admin-home');
     }
+
+    public function getBusinessType()
+    {
+        return view('administrator.modules.business-type.index');
+    }
 }
