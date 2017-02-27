@@ -201,4 +201,16 @@ class AdminLoginController extends Controller
         return Auth::guard('admin');
     }
 
+    /**
+     * @param Request $request
+     * @return bool
+     */
+    protected function hasTooManyLoginAttempts(Request $request)
+    {
+        $maxLoginAttempts = 3;
+        $lockoutTime = 1;
+        return $this->limiter()->tooManyAttempts(
+            $this->throttleKey($request), $maxLoginAttempts, $lockoutTime
+        );
+    }
 }

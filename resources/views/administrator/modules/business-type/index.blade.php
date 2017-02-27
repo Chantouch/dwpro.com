@@ -16,4 +16,6 @@
 
 @section('scripts')
     <script type="text/javascript" src="//cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/js/toastr.min.js"></script>
+    <script src="{!! asset('assets/plugins/notifyjs/dist/notify.min.js') !!}"></script>
+    <script src="{!! asset('assets/plugins/notifications/notify-metro.js') !!}"></script>
 @stop

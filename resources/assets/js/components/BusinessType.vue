@@ -203,6 +203,7 @@
                     };
                     $("#create-business-type").modal('hide');
                     toastr.success('Business Type created successfully.', 'Success Alert', {timeOut: 5000});
+                $.Notification.notify('custom','bottom right','Sample Notification', 'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Maecenas vitae orci ut dolor scelerisque aliquam.')
                     this.fetchBusinessList();
                 }, (response) => {
                     this.formErrors = response.data;

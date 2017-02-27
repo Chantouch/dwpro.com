@@ -19,5 +19,5 @@ Vue.component('example', require('./components/Example.vue'));
 Vue.component('admin', require('./components/Admin.vue'));
 Vue.component('business-type', require('./components/BusinessType.vue'));
 const app = new Vue({
-    el: '#app',
+    el: '#app'
 });

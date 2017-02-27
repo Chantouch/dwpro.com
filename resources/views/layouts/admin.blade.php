@@ -219,7 +219,19 @@
                                     <li><a href="javascript:void(0)"><i class="ti-user m-r-5"></i> Profile</a></li>
                                     <li><a href="javascript:void(0)"><i class="ti-settings m-r-5"></i> Settings</a></li>
                                     <li><a href="javascript:void(0)"><i class="ti-lock m-r-5"></i> Lock screen</a></li>
-                                    <li><a href="javascript:void(0)"><i class="ti-power-off m-r-5"></i> Logout</a></li>
+                                    <li>
+                                        @if(Auth::guard('admin')->check())
+                                            <a href="{{ route('admin.logout') }}"
+                                               onclick="event.preventDefault();
+                                                     document.getElementById('logout-form').submit();">
+                                                <i class="ti-power-off m-r-5"></i> Logout
+                                            </a>
+                                            <form id="logout-form" action="{{ route('admin.logout') }}" method="POST"
+                                                  style="display: none;">
+                                                {{ csrf_field() }}
+                                            </form>
+                                        @endif
+                                    </li>
                                 </ul>
                             </li>
                         </ul>
