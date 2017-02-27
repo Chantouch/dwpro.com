@@ -54,9 +54,9 @@
 
 <body class="fixed-left">
 <div id="app">
-    <div class="animationload">
-        <div class="loader"></div>
-    </div>
+    {{--<div class="animationload">--}}
+        {{--<div class="loader"></div>--}}
+    {{--</div>--}}
 
     <!-- Begin page -->
     <div id="wrapper">

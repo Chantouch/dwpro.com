@@ -5,8 +5,8 @@ namespace App\Http\Controllers\Administrator\Modules;
 use App\Models\BusinessType;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
-use Illuminate\Support\Facades\Validator;
-use Illuminate\Support\Facades\DB;
+use Validator;
+use DB;
 
 class BusinessTypeController extends Controller
 {
@@ -85,19 +85,7 @@ class BusinessTypeController extends Controller
     public function update(Request $request, $id)
     {
         $data = $request->all();
-        $business = BusinessType::find($id);
-        if (empty($business)) {
-            return back()->with('error', 'We can not find business type with that id');
-        }
-        $validator = Validator::make($data, BusinessType::rules(), BusinessType::messages());
-        if ($validator->fails) {
-            return back()->withErrors($validator)->withInput()->with('error', 'Please fill the required fields');
-        }
-        $business_type = $business->update($data);
-        if (!$business_type) {
-            return back()->with('error', 'We can not process your request right now.');
-        }
-        return $business_type;
+        BusinessType::find($id)->update($data);
     }
 
     /**
@@ -108,6 +96,7 @@ class BusinessTypeController extends Controller
      */
     public function destroy($id)
     {
-        //
+        BusinessType::find($id)->delete();
+        return response()->json(['done']);
     }
 }

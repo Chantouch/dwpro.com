@@ -74,13 +74,13 @@
                                 <input type="text" name="name" class="form-control" v-model="newBusinessType.name"
                                        id="name"/>
                                 <span v-if="formErrors['name']"
-                                      class="error text-danger">@{{ formErrors['name'] }}</span>
+                                      class="error text-danger">{{ formErrors['name'] }}</span>
                             </div>
                             <div class="form-group">
                                 <label for="description">Description:</label>
                                 <textarea name="description" class="form-control" id="description"
                                           v-model="newBusinessType.description"></textarea>
-                                <span v-if="formErrors['description']" class="error text-danger">@{{ formErrors['description'] }}</span>
+                                <span v-if="formErrors['description']" class="error text-danger">{{ formErrors['description'] }}</span>
                             </div>
                             <div class="form-group">
                                 <button type="submit" class="btn btn-success">Submit</button>
@@ -100,19 +100,20 @@
                         <h4 class="modal-title" id="myEditModalLabel">Create Item</h4>
                     </div>
                     <div class="modal-body">
-                        <form method="POST" enctype="multipart/form-data" v-on:submit.prevent="updateBusinessType">
+                        <form method="POST" enctype="multipart/form-data"
+                              v-on:submit.prevent="updateBusinessType(fillBusinessType.id)">
                             <div class="form-group">
                                 <label for="edit-name">Name:</label>
                                 <input type="text" name="name" class="form-control" v-model="fillBusinessType.name"
                                        id="edit-name"/>
-                                <span v-if="formErrors['name']"
-                                      class="error text-danger">@{{ formErrors['name'] }}</span>
+                                <span v-if="formErrorsUpdate['name']"
+                                      class="error text-danger">{{ formErrorsUpdate['name'] }}</span>
                             </div>
                             <div class="form-group">
                                 <label for="description">Description:</label>
                                 <textarea name="edit-description" class="form-control" id="edit-description"
                                           v-model="fillBusinessType.description"></textarea>
-                                <span v-if="formErrors['description']" class="error text-danger">@{{ formErrors['description'] }}</span>
+                                <span v-if="formErrorsUpdate['description']" class="error text-danger">{{ formErrorsUpdate['description'] }}</span>
                             </div>
                             <div class="form-group">
                                 <button type="submit" class="btn btn-success">Submit</button>
@@ -196,6 +197,7 @@
             createBusinessType(){
                 let input = this.newBusinessType;
                 this.$http.post('/api/administrator/modules/business-types', input).then((response) => {
+                    console.log(response);
                     this.newBusinessType = {
                         'name': '',
                         'description': '',
@@ -203,7 +205,6 @@
                     };
                     $("#create-business-type").modal('hide');
                     toastr.success('Business Type created successfully.', 'Success Alert', {timeOut: 5000});
-                $.Notification.notify('custom','bottom right','Sample Notification', 'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Maecenas vitae orci ut dolor scelerisque aliquam.')
                     this.fetchBusinessList();
                 }, (response) => {
                     this.formErrors = response.data;
@@ -219,14 +220,16 @@
             },
             deleteBusinessType(business){
                 this.$http.delete('/api/administrator/modules/business-types/' + business.id).then((response) => {
-                    this.changePage(this.$pagination.current_page);
+                    //this.changePage(this.$pagination.current_page);
+                    console.log(response);
                     toastr.success('Business Type Deleted Successfully.', 'Success Alert', {timeOut: 5000});
+                    this.fetchBusinessList();
                 })
             },
             updateBusinessType(id){
                 let input = this.fillBusinessType;
-                this.$http.put('/api/administrator/modules/business-types/' + id, input).then((response) => {
-                    this.changePage(this.pagination.current_page);
+                this.$http.patch('/api/administrator/modules/business-types/' + id, input).then((response) => {
+                    //this.changePage(this.pagination.current_page);
                     this.fillBusinessType = {
                         'name': '',
                         'description': '',
@@ -235,7 +238,9 @@
                     };
                     $("#edit-business-type").modal('hide');
                     toastr.success('Business Type Updated Successfully.', 'Success Alert', {timeOut: 5000});
+                    this.fetchBusinessList();
                 }, (response) => {
+                    console.log(response);
                     this.formErrorsUpdate = response.data;
                 });
             },
