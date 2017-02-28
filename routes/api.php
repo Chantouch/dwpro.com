@@ -19,4 +19,5 @@ Route::middleware('auth:api')->get('/user', function (Request $request) {
 
 Route::group(['middleware' => 'api'], function () {
     Route::resource('administrator/modules/business-types', 'Administrator\Modules\BusinessTypeController');
+    Route::resource('administrator/modules/cities', 'Administrator\Modules\CityProvinceController');
 });

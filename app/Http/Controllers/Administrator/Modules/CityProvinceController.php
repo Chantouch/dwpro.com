@@ -2,24 +2,19 @@
 
 namespace App\Http\Controllers\Administrator\Modules;
 
-use App\Models\BusinessType;
+use App\Models\City;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use Validator;
 use DB;
 
-class BusinessTypeController extends Controller
+class CityProvinceController extends Controller
 {
+    private $cities;
 
-    private $business_type;
-
-    /**
-     * BusinessTypeController constructor.
-     * @param BusinessType $businessType
-     */
-    public function __construct(BusinessType $businessType)
+    public function __construct(City $city)
     {
-        $this->business_type = $businessType;
+        $this->cities = $city;
     }
 
     /**
@@ -29,8 +24,8 @@ class BusinessTypeController extends Controller
      */
     public function index()
     {
-        $business_type = $this->business_type->paginate(5);
-        return response()->json($business_type);
+        $cities = $this->cities->paginate(5);
+        return response()->json($cities);
     }
 
     /**
@@ -52,12 +47,12 @@ class BusinessTypeController extends Controller
     public function store(Request $request)
     {
         $data = $request->all();
-        $validator = Validator::make($data, BusinessType::rules(), BusinessType::messages());
+        $validator = Validator::make($data, City::rules(), City::messages());
         if ($validator->fails()) {
             return redirect()->back()->withErrors($validator)->withInput()->with('error', 'Please input the required field.');
         }
         $data['status'] = 1;
-        $business_type = BusinessType::create($data);
+        $business_type = $this->cities->create($data);
         if (!$business_type) {
             DB::rollbackTransaction();
             return redirect()->back()->withInput()->with('error', 'We unable to process your request right now.');
@@ -97,7 +92,12 @@ class BusinessTypeController extends Controller
     public function update(Request $request, $id)
     {
         $data = $request->all();
-        BusinessType::find($id)->update($data);
+        $this->validate($request, [
+            'name' => 'required',
+            'description' => 'required',
+        ]);
+        $edit = $this->cities->find($id)->update($data);
+        return response()->json($edit);
     }
 
     /**
@@ -108,7 +108,7 @@ class BusinessTypeController extends Controller
      */
     public function destroy($id)
     {
-        BusinessType::find($id)->delete();
-        return response()->json(['done']);
+        $this->cities->find($id)->delete();
+        return response()->json('done');
     }
 }

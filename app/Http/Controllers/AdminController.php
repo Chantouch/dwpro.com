@@ -19,6 +19,11 @@ class AdminController extends Controller
 
     public function getBusinessType()
     {
-        return view('administrator.modules.business-type.index');
+        return view('administrator.modules.business-type');
+    }
+
+    public function getCityProvince()
+    {
+        return view('administrator.modules.city-province');
     }
 }

@@ -1,13 +1,22 @@
 <template xmlns:v-on="http://www.w3.org/1999/xhtml">
     <div class="col-lg-12">
-        <h4 class="m-t-0 header-title"><b>Business Types</b></h4>
-        <p class="text-muted font-13">
-            Add <code>.table-bordered</code> for borders on all sides of the table and cells.
-        </p>
-        <div class="pull-right">
-            <button type="button" class="btn btn-success" data-toggle="modal" data-target="#create-business-type">
-                Create Item
-            </button>
+        <div class="row">
+            <div class="col-sm-6">
+                <div class="pull-left">
+                    <h4 class="m-t-0 header-title"><b>Business Types</b></h4>
+                    <p class="text-muted font-13">
+                        Your data of business modules is showing here now.
+                    </p>
+                </div>
+            </div>
+            <div class="col-sm-6">
+                <div class="pull-right">
+                    <button type="button" class="btn btn-success waves-effect waves-light" data-toggle="modal"
+                            data-target="#create-business-type">
+                        <i class="ti-plus"></i>
+                    </button>
+                </div>
+            </div>
         </div>
 
         <div class="p-20">
@@ -23,49 +32,59 @@
                 </thead>
                 <tbody>
                 <tr v-for="business in business_types">
-                    <th scope="row">{{ business.id }}</th>
+                    <td scope="row">{{ business.id }}</td>
                     <td>{{ business.name }}</td>
                     <td>{{ business.description }}</td>
                     <td>{{ business.status }}</td>
                     <td>
-                        <button class="btn btn-primary" @click.prevent="editBusinessType(business)">Edit</button>
-                        <button class="btn btn-danger" @click.prevent="deleteBusinessType(business)">Delete</button>
+                        <div class="btn-group">
+                            <button class="btn btn-default btn-xs waves-effect waves-light">
+                                <i class="glyphicon glyphicon-eye-open"></i></button>
+                            <button class="btn btn-default btn-xs waves-effect waves-light"
+                                    @click.prevent="editBusinessType(business)">
+                                <i class="glyphicon glyphicon-edit"></i></button>
+                            <button type="submit" class="btn btn-danger btn-xs waves-effect waves-light"
+                                    @click.prevent="deleteBusinessType(business)">
+                                <i class="glyphicon glyphicon-trash"></i></button>
+                        </div>
                     </td>
                 </tr>
                 </tbody>
             </table>
+
             <!-- Pagination -->
-            <!--<nav>-->
-            <!--<ul class="pagination">-->
-            <!--<li v-if="pagination.current_page > 1">-->
-            <!--<a href="#" aria-label="Previous"-->
-            <!--@click.prevent="changePage(pagination.current_page - 1)">-->
-            <!--<span aria-hidden="true">«</span>-->
-            <!--</a>-->
-            <!--</li>-->
-            <!--<li v-for="page in pageNumber"-->
-            <!--v-bind:class="[ page == isActive ? 'active' : '']">-->
-            <!--<a href="#"-->
-            <!--@click.prevent="changePage(page)">@{{ page }}</a>-->
-            <!--</li>-->
-            <!--<li v-if="pagination.current_page < pagination.last_page">-->
-            <!--<a href="#" aria-label="Next"-->
-            <!--@click.prevent="changePage(pagination.current_page + 1)">-->
-            <!--<span aria-hidden="true">»</span>-->
-            <!--</a>-->
-            <!--</li>-->
-            <!--</ul>-->
-            <!--</nav>-->
+            <nav>
+                <ul class="pagination">
+                    <li v-if="pagination.current_page > 1">
+                        <a href="#" aria-label="Previous"
+                           @click.prevent="changePage(pagination.current_page - 1)">
+                            <span aria-hidden="true">«</span>
+                        </a>
+                    </li>
+                    <li v-for="page in pagesNumber"
+                        v-bind:class="[ page == isActive ? 'active' : '']">
+                        <a href="#"
+                           @click.prevent="changePage(page)">{{ page }}</a>
+                    </li>
+                    <li v-if="pagination.current_page < pagination.last_page">
+                        <a href="#" aria-label="Next"
+                           @click.prevent="changePage(pagination.current_page + 1)">
+                            <span aria-hidden="true">»</span>
+                        </a>
+                    </li>
+                </ul>
+            </nav>
 
         </div>
         <!-- Create Item Modal -->
-        <div class="modal fade" id="create-business-type" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+        <div class="modal fade" id="create-business-type" tabindex="-1" role="dialog"
+             aria-labelledby="myCreateModalLabel">
             <div class="modal-dialog" role="document">
                 <div class="modal-content">
                     <div class="modal-header">
                         <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span
                                 aria-hidden="true">×</span></button>
-                        <h4 class="modal-title" id="myModalLabel">Create Item</h4>
+                        <h4 class="modal-title" id="myCreateModalLabel">Create Item</h4>
                     </div>
                     <div class="modal-body">
                         <form method="POST" enctype="multipart/form-data" v-on:submit.prevent="createBusinessType">
@@ -133,6 +152,16 @@
         data() {
             return {
                 edit: false,
+                props: {
+                    pagination: {
+                        type: Object,
+                        required: true
+                    },
+                    offset: {
+                        type: Number,
+                        default: 4
+                    }
+                },
                 business_types: [],
                 newBusinessType: {
                     'name': '',
@@ -145,23 +174,19 @@
                     'status': '',
                     'id': ''
                 },
-                pagination: {
-                    total: 0,
-                    per_page: 2,
-                    from: 1,
-                    to: 0,
-                    current_page: 1
-                },
+                counter: 0,
+                pagination: {},
                 offset: 4,
                 formErrors: {},
                 formErrorsUpdate: {},
+                name: ''
             };
         },
         computed: {
-            isActive(){
+            isActive: function () {
                 return this.pagination.current_page;
             },
-            pageNumber(){
+            pagesNumber: function () {
                 if (!this.pagination.to) {
                     return [];
                 }
@@ -173,12 +198,11 @@
                 if (to >= this.pagination.last_page) {
                     to = this.pagination.last_page;
                 }
-                let pageArray = [];
-                while (from <= to) {
-                    pageArray.push(from);
-                    from++;
+                let pagesArray = [];
+                for (from = 1; from <= to; from++) {
+                    pagesArray.push(from);
                 }
-                return pageArray;
+                return pagesArray;
             }
         },
 
@@ -186,10 +210,10 @@
             this.fetchBusinessList(this.pagination.current_page);
         },
         methods: {
-            fetchBusinessList (page) {
-                this.$http.get('/api/administrator/modules/business-types?page=' + page).then(function (response) {
-                    this.business_types = response.data;
-                    this.pagination = response.data.pagination;
+            fetchBusinessList (page_url) {
+                this.$http.get('/api/administrator/modules/business-types?page=' + page_url).then(function (response) {
+                    this.business_types = response.data.data;
+                    this.pagination = response.data;
                 }, function (data) {
                     console.log(data)
                 });
@@ -197,7 +221,6 @@
             createBusinessType(){
                 let input = this.newBusinessType;
                 this.$http.post('/api/administrator/modules/business-types', input).then((response) => {
-                    console.log(response);
                     this.newBusinessType = {
                         'name': '',
                         'description': '',
@@ -205,7 +228,8 @@
                     };
                     $("#create-business-type").modal('hide');
                     toastr.success('Business Type created successfully.', 'Success Alert', {timeOut: 5000});
-                    this.fetchBusinessList();
+                    //this.fetchBusinessList();
+                    this.changePage(this.pagination.current_page);
                 }, (response) => {
                     this.formErrors = response.data;
                 });
@@ -219,17 +243,18 @@
                 $("#edit-business-type").modal('show');
             },
             deleteBusinessType(business){
-                this.$http.delete('/api/administrator/modules/business-types/' + business.id).then((response) => {
-                    //this.changePage(this.$pagination.current_page);
-                    console.log(response);
-                    toastr.success('Business Type Deleted Successfully.', 'Success Alert', {timeOut: 5000});
-                    this.fetchBusinessList();
-                })
+                let accepted = confirm('Do your really want to do this?');
+                if (accepted) {
+                    this.$http.delete('/api/administrator/modules/business-types/' + business.id).then((response) => {
+                        toastr.success('Business Type Deleted Successfully.', 'Success Alert', {timeOut: 5000});
+                        //this.fetchBusinessList();
+                        this.changePage(this.pagination.current_page);
+                    });
+                }
             },
             updateBusinessType(id){
                 let input = this.fillBusinessType;
                 this.$http.patch('/api/administrator/modules/business-types/' + id, input).then((response) => {
-                    //this.changePage(this.pagination.current_page);
                     this.fillBusinessType = {
                         'name': '',
                         'description': '',
@@ -238,14 +263,13 @@
                     };
                     $("#edit-business-type").modal('hide');
                     toastr.success('Business Type Updated Successfully.', 'Success Alert', {timeOut: 5000});
-                    this.fetchBusinessList();
+                    //this.fetchBusinessList();
+                    this.changePage(this.pagination.current_page);
                 }, (response) => {
-                    console.log(response);
                     this.formErrorsUpdate = response.data;
                 });
             },
-
-            changePage(page){
+            changePage: function (page) {
                 this.pagination.current_page = page;
                 this.fetchBusinessList(page);
             }

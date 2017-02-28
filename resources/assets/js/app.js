@@ -1,4 +1,3 @@
-
 /**
  * First we will load all of this project's JavaScript dependencies which
  * includes Vue and other libraries. It is a great starting point when
@@ -13,11 +12,30 @@ require('./bootstrap');
  * or customize the JavaScript scaffolding to fit your unique needs.
  */
 const Vue = require('vue');
+
+import VueRouter from 'vue-router';
+import App from './App.vue';
 Vue.use(require('vue-resource'));
+Vue.use(VueRouter);
+import {routes} from './routes';
+
 Vue.http.headers.common['X-CSRF-TOKEN'] = $("#token").attr("value");
+
 Vue.component('example', require('./components/Example.vue'));
+
 Vue.component('admin', require('./components/Admin.vue'));
-Vue.component('business-type', require('./components/BusinessType.vue'));
+
+Vue.component('business-type', require('./components/modules/BusinessType.vue'));
+
+Vue.component('city-province', require('./components/modules/CityProvince.vue'));
+
+const router = new VueRouter({
+    mode: 'history',
+    routes
+});
+
 const app = new Vue({
-    el: '#app'
+    el: '#app',
+    router,
+    render: h => h(App)
 });
