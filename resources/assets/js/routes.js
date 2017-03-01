@@ -3,7 +3,7 @@
  */
 
 import Home from './components/Admin.vue';
-import BusinessType from  './components/modules/BusinessType.vue';
+import BusinessType from  './components/modules/business-type/BusinessType.vue';
 import CityProvince from  './components/modules/CityProvince.vue';
 import Department from './components/modules/Department.vue';
 import Function from './components/modules/Function.vue';

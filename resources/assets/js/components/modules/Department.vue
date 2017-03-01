@@ -3,16 +3,16 @@
         <div class="row">
             <div class="col-sm-6">
                 <div class="pull-left">
-                    <h4 class="m-t-0 header-title"><b>Functionss</b></h4>
+                    <h4 class="m-t-0 header-title"><b>Departments</b></h4>
                     <p class="text-muted font-13">
-                        Your data of function modules is showing here now.
+                        Your data of department modules is showing here now.
                     </p>
                 </div>
             </div>
             <div class="col-sm-6">
                 <div class="pull-right">
                     <button type="button" class="btn btn-success waves-effect waves-light" data-toggle="modal"
-                            data-target="#create-functions">
+                            data-target="#create-department-type">
                         <i class="ti-plus"></i>
                     </button>
                 </div>
@@ -31,20 +31,20 @@
                 </tr>
                 </thead>
                 <tbody>
-                <tr v-for="fun in functions">
-                    <td scope="row">{{ fun.id }}</td>
-                    <td>{{ fun.name }}</td>
-                    <td>{{ fun.description }}</td>
-                    <td>{{ fun.status }}</td>
+                <tr v-for="department in departments">
+                    <td scope="row">{{ department.id }}</td>
+                    <td>{{ department.name }}</td>
+                    <td>{{ department.description }}</td>
+                    <td>{{ department.status }}</td>
                     <td>
                         <div class="btn-group">
                             <button class="btn btn-default btn-xs waves-effect waves-light">
                                 <i class="glyphicon glyphicon-eye-open"></i></button>
                             <button class="btn btn-default btn-xs waves-effect waves-light"
-                                    @click.prevent="editFunctions(fun)">
+                                    @click.prevent="editDepartment(department)">
                                 <i class="glyphicon glyphicon-edit"></i></button>
                             <button type="submit" class="btn btn-danger btn-xs waves-effect waves-light"
-                                    @click.prevent="deleteFunctions(fun)">
+                                    @click.prevent="deleteDepartment(department)">
                                 <i class="glyphicon glyphicon-trash"></i></button>
                         </div>
                     </td>
@@ -77,7 +77,7 @@
 
         </div>
         <!-- Create Item Modal -->
-        <div class="modal fade" id="create-functions" tabindex="-1" role="dialog"
+        <div class="modal fade" id="create-department-type" tabindex="-1" role="dialog"
              aria-labelledby="myCreateModalLabel">
             <div class="modal-dialog" role="document">
                 <div class="modal-content">
@@ -87,10 +87,10 @@
                         <h4 class="modal-title" id="myCreateModalLabel">Create Item</h4>
                     </div>
                     <div class="modal-body">
-                        <form method="POST" enctype="multipart/form-data" v-on:submit.prevent="createFunctions">
+                        <form method="POST" enctype="multipart/form-data" v-on:submit.prevent="createDepartment">
                             <div class="form-group">
                                 <label for="name">Name:</label>
-                                <input type="text" name="name" class="form-control" v-model="newFunctions.name"
+                                <input type="text" name="name" class="form-control" v-model="newDepartment.name"
                                        id="name"/>
                                 <span v-if="formErrors['name']"
                                       class="error text-danger">{{ formErrors['name'] }}</span>
@@ -98,7 +98,7 @@
                             <div class="form-group">
                                 <label for="description">Description:</label>
                                 <textarea name="description" class="form-control" id="description"
-                                          v-model="newFunctions.description"></textarea>
+                                          v-model="newDepartment.description"></textarea>
                                 <span v-if="formErrors['description']" class="error text-danger">{{ formErrors['description'] }}</span>
                             </div>
                             <div class="form-group">
@@ -110,7 +110,7 @@
             </div>
         </div>
 
-        <div class="modal fade" id="edit-functions" tabindex="-1" role="dialog" aria-labelledby="myEditModalLabel">
+        <div class="modal fade" id="edit-department-type" tabindex="-1" role="dialog" aria-labelledby="myEditModalLabel">
             <div class="modal-dialog" role="document">
                 <div class="modal-content">
                     <div class="modal-header">
@@ -120,10 +120,10 @@
                     </div>
                     <div class="modal-body">
                         <form method="POST" enctype="multipart/form-data"
-                              v-on:submit.prevent="updateFunctions(fillFunctions.id)">
+                              v-on:submit.prevent="updateDepartment(fillDepartment.id)">
                             <div class="form-group">
                                 <label for="edit-name">Name:</label>
-                                <input type="text" name="name" class="form-control" v-model="fillFunctions.name"
+                                <input type="text" name="name" class="form-control" v-model="fillDepartment.name"
                                        id="edit-name"/>
                                 <span v-if="formErrorsUpdate['name']"
                                       class="error text-danger">{{ formErrorsUpdate['name'] }}</span>
@@ -131,7 +131,7 @@
                             <div class="form-group">
                                 <label for="description">Description:</label>
                                 <textarea name="edit-description" class="form-control" id="edit-description"
-                                          v-model="fillFunctions.description"></textarea>
+                                          v-model="fillDepartment.description"></textarea>
                                 <span v-if="formErrorsUpdate['description']" class="error text-danger">{{ formErrorsUpdate['description'] }}</span>
                             </div>
                             <div class="form-group">
@@ -142,6 +142,8 @@
                 </div>
             </div>
         </div>
+
+
     </div>
 </template>
 
@@ -160,13 +162,13 @@
                         default: 4
                     }
                 },
-                functions: [],
-                newFunctions: {
+                departments: [],
+                newDepartment: {
                     'name': '',
                     'description': '',
                     'status': ''
                 },
-                fillFunctions: {
+                fillDepartment: {
                     'name': '',
                     'description': '',
                     'status': '',
@@ -209,23 +211,23 @@
         },
         methods: {
             fetchList (page_url) {
-                this.$http.get('/api/administrator/modules/functions?page=' + page_url).then(function (response) {
-                    this.functions = response.data.data;
+                this.$http.get('/api/administrator/modules/departments?page=' + page_url).then(function (response) {
+                    this.departments = response.data.data;
                     this.pagination = response.data;
                 }, function (data) {
                     console.log(data)
                 });
             },
-            createFunctions(){
-                let input = this.newFunctions;
-                this.$http.post('/api/administrator/modules/functions', input).then((response) => {
-                    this.newFunctions = {
+            createDepartment(){
+                let input = this.newDepartment;
+                this.$http.post('/api/administrator/modules/departments', input).then((response) => {
+                    this.newDepartment = {
                         'name': '',
                         'description': '',
                         'status': ''
                     };
-                    $("#create-functions").modal('hide');
-                    toastr.success('Functions created successfully.', 'Success Alert', {timeOut: 5000});
+                    $("#create-department-type").modal('hide');
+                    toastr.success('Department created successfully.', 'Success Alert', {timeOut: 5000});
                     this.fetchList();
                     this.changePage(this.pagination.current_page);
                 }, (response) => {
@@ -233,33 +235,33 @@
                 });
             },
 
-            editFunctions(fun){
-                this.fillFunctions.name = fun.name;
-                this.fillFunctions.description = fun.description;
-                this.fillFunctions.status = fun.status;
-                this.fillFunctions.id = fun.id;
-                $("#edit-functions").modal('show');
+            editDepartment(department){
+                this.fillDepartment.name = department.name;
+                this.fillDepartment.description = department.description;
+                this.fillDepartment.status = department.status;
+                this.fillDepartment.id = department.id;
+                $("#edit-department-type").modal('show');
             },
-            deleteFunctions(fun){
+            deleteDepartment(department){
                 let accepted = confirm('Do your really want to do this?');
                 if (accepted) {
-                    this.$http.delete('/api/administrator/modules/functions/' + fun.id).then((response) => {
-                        toastr.success('Functions Deleted Successfully.', 'Success Alert', {timeOut: 5000});
+                    this.$http.delete('/api/administrator/modules/departments/' + department.id).then((response) => {
+                        toastr.success('Department Deleted Successfully.', 'Success Alert', {timeOut: 5000});
                         this.changePage(this.pagination.current_page);
                     });
                 }
             },
-            updateFunctions(id){
-                let input = this.fillFunctions;
-                this.$http.patch('/api/administrator/modules/functions/' + id, input).then((response) => {
-                    this.fillFunctions = {
+            updateDepartment(id){
+                let input = this.fillDepartment;
+                this.$http.patch('/api/administrator/modules/departments/' + id, input).then((response) => {
+                    this.fillDepartment = {
                         'name': '',
                         'description': '',
                         'status': '',
                         'id': ''
                     };
-                    $("#edit-functions").modal('hide');
-                    toastr.success('Functions Updated Successfully.', 'Success Alert', {timeOut: 5000});
+                    $("#edit-department-type").modal('hide');
+                    toastr.success('Department Updated Successfully.', 'Success Alert', {timeOut: 5000});
                     this.changePage(this.pagination.current_page);
                 }, (response) => {
                     this.formErrorsUpdate = response.data;

@@ -15,9 +15,9 @@ const Vue = require('vue');
 
 import VueRouter from 'vue-router';
 import App from './App.vue';
+import {routes} from './routes';
 Vue.use(require('vue-resource'));
 Vue.use(VueRouter);
-import {routes} from './routes';
 
 Vue.http.headers.common['X-CSRF-TOKEN'] = $("#token").attr("value");
 
@@ -25,9 +25,11 @@ Vue.component('example', require('./components/Example.vue'));
 
 Vue.component('admin', require('./components/Admin.vue'));
 
-Vue.component('business-type', require('./components/modules/BusinessType.vue'));
+Vue.component('business-type', require('./components/modules/business-type/BusinessType.vue'));
 
 Vue.component('city-province', require('./components/modules/CityProvince.vue'));
+
+Vue.component('department', require('./components/modules/Department.vue'));
 
 const router = new VueRouter({
     mode: 'history',

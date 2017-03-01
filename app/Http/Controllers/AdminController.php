@@ -26,4 +26,9 @@ class AdminController extends Controller
     {
         return view('administrator.modules.city-province');
     }
+
+    public function getDepartment()
+    {
+        return view('administrator.modules.department.index');
+    }
 }
