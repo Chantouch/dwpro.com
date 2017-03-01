@@ -26,20 +26,23 @@ Route::group(['prefix' => 'admin'], function () {
     Route::post('logout', 'Auth\AdminLoginController@logout')->name('admin.logout');
 
     Route::get('home', 'AdminController@index')->name('admin.home');
-    Route::get('modules/business-types', 'AdminController@getBusinessType')->name('admin.modules.business-types');
-    Route::get('modules/city-provinces', 'AdminController@getBusinessType')->name('admin.modules.business-types');
-    Route::get('modules/departments', 'AdminController@getBusinessType')->name('admin.modules.business-types');
-    Route::get('modules/functions', 'AdminController@getBusinessType')->name('admin.modules.business-types');
-    Route::get('modules/industries', 'AdminController@getBusinessType')->name('admin.modules.business-types');
-    Route::get('modules/qualifications', 'AdminController@getBusinessType')->name('admin.modules.business-types');
-    Route::get('modules/levels', 'AdminController@getBusinessType')->name('admin.modules.business-types');
-    Route::get('modules/languages', 'AdminController@getBusinessType')->name('admin.modules.business-types');
-    Route::get('modules/positions', 'AdminController@getBusinessType')->name('admin.modules.business-types');
+    Route::prefix('modules')->group(function () {
 
+        Route::get('business-types', 'AdminController@getBusinessType')->name('admin.modules.business-types');
+        Route::get('city-provinces', 'AdminController@getCityProvince')->name('admin.modules.city-provinces');
+        Route::get('departments', 'AdminController@getDepartment')->name('admin.modules.departments');
+        Route::get('functions', 'AdminController@getFunction')->name('admin.modules.functions');
+        Route::get('industries', 'AdminController@getIndustry')->name('admin.modules.industries');
+        Route::get('qualifications', 'AdminController@getQualification')->name('admin.modules.qualifications');
+        Route::get('levels', 'AdminController@getLevel')->name('admin.modules.levels');
+        Route::get('languages', 'AdminController@getLanguage')->name('admin.modules.languages');
+        Route::get('positions', 'AdminController@getPosition')->name('admin.modules.positions');
+
+    });
 });
 
 //Employee Route
-Route::group(['prefix' => 'employee'], function () {
+Route::prefix('employee')->group(function () {
     Route::get('login', 'Auth\EmployeeLoginController@showLoginForm')->name('employee.login');
     Route::post('login', 'Auth\EmployeeLoginController@login')->name('employee.login.post');
     Route::post('logout', 'Auth\EmployeeLoginController@logout')->name('employee.logout');

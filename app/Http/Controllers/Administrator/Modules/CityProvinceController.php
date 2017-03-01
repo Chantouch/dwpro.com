@@ -47,10 +47,10 @@ class CityProvinceController extends Controller
     public function store(Request $request)
     {
         $data = $request->all();
-        $validator = Validator::make($data, City::rules(), City::messages());
-        if ($validator->fails()) {
-            return redirect()->back()->withErrors($validator)->withInput()->with('error', 'Please input the required field.');
-        }
+        $this->validate($request, [
+            'name' => 'required',
+            'description' => 'required',
+        ]);
         $data['status'] = 1;
         $business_type = $this->cities->create($data);
         if (!$business_type) {

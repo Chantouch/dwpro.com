@@ -12,7 +12,7 @@
             <div class="col-sm-6">
                 <div class="pull-right">
                     <button type="button" class="btn btn-success waves-effect waves-light" data-toggle="modal"
-                            data-target="#create-business-type">
+                            data-target="#create-city-province">
                         <i class="ti-plus"></i>
                     </button>
                 </div>
@@ -31,20 +31,20 @@
                 </tr>
                 </thead>
                 <tbody>
-                <tr v-for="business in business_types">
-                    <td scope="row">{{ business.id }}</td>
-                    <td>{{ business.name }}</td>
-                    <td>{{ business.description }}</td>
-                    <td>{{ business.status }}</td>
+                <tr v-for="city_province in city_provinces">
+                    <td scope="row">{{ city_province.id }}</td>
+                    <td>{{ city_province.name }}</td>
+                    <td>{{ city_province.description }}</td>
+                    <td>{{ city_province.status }}</td>
                     <td>
                         <div class="btn-group">
                             <button class="btn btn-default btn-xs waves-effect waves-light">
                                 <i class="glyphicon glyphicon-eye-open"></i></button>
                             <button class="btn btn-default btn-xs waves-effect waves-light"
-                                    @click.prevent="editCityProvince(business)">
+                                    @click.prevent="editCityProvince(city_province)">
                                 <i class="glyphicon glyphicon-edit"></i></button>
                             <button type="submit" class="btn btn-danger btn-xs waves-effect waves-light"
-                                    @click.prevent="deleteCityProvince(business)">
+                                    @click.prevent="deleteCityProvince(city_province)">
                                 <i class="glyphicon glyphicon-trash"></i></button>
                         </div>
                     </td>
@@ -54,7 +54,7 @@
 
             <!-- Pagination -->
             <nav>
-                <ul class="pagination">
+                <ul class="pagination" v-if="pagination.total >= pagination.per_page">
                     <li v-if="pagination.current_page > 1">
                         <a href="#" aria-label="Previous"
                            @click.prevent="changePage(pagination.current_page - 1)">
@@ -77,7 +77,7 @@
 
         </div>
         <!-- Create Item Modal -->
-        <div class="modal fade" id="create-business-type" tabindex="-1" role="dialog"
+        <div class="modal fade" id="create-city-province" tabindex="-1" role="dialog"
              aria-labelledby="myCreateModalLabel">
             <div class="modal-dialog" role="document">
                 <div class="modal-content">
@@ -87,7 +87,8 @@
                         <h4 class="modal-title" id="myCreateModalLabel">Create Item</h4>
                     </div>
                     <div class="modal-body">
-                        <form method="POST" enctype="multipart/form-data" v-on:submit.prevent="createCityProvince">
+                        <form method="POST" enctype="multipart/form-data" v-on:submit.prevent="createCityProvince"
+                              @keydown="errors.clear($event.target.name)">
                             <div class="form-group">
                                 <label for="name">Name:</label>
                                 <input type="text" name="name" class="form-control" v-model="newCityProvince.name"
@@ -110,7 +111,7 @@
             </div>
         </div>
 
-        <div class="modal fade" id="edit-business-type" tabindex="-1" role="dialog" aria-labelledby="myEditModalLabel">
+        <div class="modal fade" id="edit-city-province" tabindex="-1" role="dialog" aria-labelledby="myEditModalLabel">
             <div class="modal-dialog" role="document">
                 <div class="modal-content">
                     <div class="modal-header">
@@ -142,12 +143,27 @@
                 </div>
             </div>
         </div>
-
-
     </div>
 </template>
 
 <script>
+    class Errors {
+
+        constructor() {
+            this.errors = {};
+        }
+
+        get(field) {
+            if (this.errors[field]) {
+                return this.errors[field][0];
+            }
+        }
+
+        clear(field) {
+            delete this.errors[field];
+            console.log(field);
+        }
+    }
     export default {
         data() {
             return {
@@ -162,7 +178,7 @@
                         default: 4
                     }
                 },
-                business_types: [],
+                city_provinces: [],
                 newCityProvince: {
                     'name': '',
                     'description': '',
@@ -177,9 +193,9 @@
                 counter: 0,
                 pagination: {},
                 offset: 4,
-                formErrors: {},
-                formErrorsUpdate: {},
-                name: ''
+//                formErrors: {},
+                formErrorsUpdate: new Errors(),
+                formErrors: new Errors()
             };
         },
         computed: {
@@ -212,7 +228,7 @@
         methods: {
             fetchList (page_url) {
                 this.$http.get('/api/administrator/modules/cities?page=' + page_url).then(function (response) {
-                    this.business_types = response.data.data;
+                    this.city_provinces = response.data.data;
                     this.pagination = response.data;
                 }, function (data) {
                     console.log(data)
@@ -226,31 +242,16 @@
                         'description': '',
                         'status': ''
                     };
-                    $("#create-business-type").modal('hide');
+                    $("#create-city-province").modal('hide');
                     toastr.success('City province created successfully.', 'Success Alert', {timeOut: 5000});
                     this.fetchList();
                     this.changePage(this.pagination.current_page);
                 }, (response) => {
                     this.formErrors = response.data;
+                    console.log(response.data);
+                }).catch(error => {
+                    console.log(error.response.data);
                 });
-            },
-
-            editCityProvince(business){
-                this.fillCityProvince.name = business.name;
-                this.fillCityProvince.description = business.description;
-                this.fillCityProvince.status = business.status;
-                this.fillCityProvince.id = business.id;
-                $("#edit-business-type").modal('show');
-            },
-            deleteCityProvince(business){
-                let accepted = confirm('Do your really want to do this?');
-                if (accepted) {
-                    this.$http.delete('/api/administrator/modules/cities/' + business.id).then((response) => {
-                        toastr.success('City province Deleted Successfully.', 'Success Alert', {timeOut: 5000});
-                        //this.fetchBusinessList();
-                        this.changePage(this.pagination.current_page);
-                    });
-                }
             },
             updateCityProvince(id){
                 let input = this.fillCityProvince;
@@ -261,14 +262,35 @@
                         'status': '',
                         'id': ''
                     };
-                    $("#edit-business-type").modal('hide');
+                    $("#edit-city-province").modal('hide');
                     toastr.success('City province Updated Successfully.', 'Success Alert', {timeOut: 5000});
-                    //this.fetchBusinessList();
                     this.changePage(this.pagination.current_page);
                 }, (response) => {
                     this.formErrorsUpdate = response.data;
+                    console.log(response.data);
                 });
             },
+
+            editCityProvince(city_province){
+                this.fillCityProvince.name = city_province.name;
+                this.fillCityProvince.description = city_province.description;
+                this.fillCityProvince.status = city_province.status;
+                this.fillCityProvince.id = city_province.id;
+                $("#edit-city-province").modal('show');
+            },
+            deleteCityProvince(city_province){
+                let accepted = confirm('Do your really want to do this?');
+                if (accepted) {
+                    this.$http.delete('/api/administrator/modules/cities/' + city_province.id).then((response) => {
+                        toastr.success('City province Deleted Successfully.', 'Success Alert', {timeOut: 5000});
+                        //this.fetchcity_provinceList();
+                        this.changePage(this.pagination.current_page);
+                    }).catch(error => {
+                        console.log(error.response.data);
+                    });
+                }
+            },
+
             changePage: function (page) {
                 this.pagination.current_page = page;
                 this.fetchList(page);

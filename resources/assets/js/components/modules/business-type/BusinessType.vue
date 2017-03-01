@@ -54,7 +54,7 @@
 
             <!-- Pagination -->
             <nav>
-                <ul class="pagination">
+                <ul class="pagination" v-if="pagination.total >= pagination.per_page">
                     <li v-if="pagination.current_page > 1">
                         <a href="#" aria-label="Previous"
                            @click.prevent="changePage(pagination.current_page - 1)">
