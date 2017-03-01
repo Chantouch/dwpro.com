@@ -155,7 +155,7 @@
                                 <li><a href="javascript:void(0)"><i class="ti-settings m-r-5"></i> Settings</a></li>
                                 <li><a href="javascript:void(0)"><i class="ti-lock m-r-5"></i> Lock screen</a></li>
                                 <li>
-                                    <a href=""
+                                    <a @click="logout"
                                        onclick="event.preventDefault();
                                                      document.getElementById('logout-form').submit();">
                                         <i class="ti-power-off m-r-5"></i> Logout
@@ -175,5 +175,13 @@
     <!-- Top Bar End -->
 </template>
 <script>
-    export default{}
+    export default{
+        methods: {
+            logout(){
+                this.$http.post('/admin/logout').then((response) => {
+                    console.log(response);
+                })
+            }
+        }
+    }
 </script>

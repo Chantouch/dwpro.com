@@ -228,7 +228,7 @@
                     };
                     $("#create-business-type").modal('hide');
                     toastr.success('City province created successfully.', 'Success Alert', {timeOut: 5000});
-                    //this.fetchBusinessList();
+                    this.fetchList();
                     this.changePage(this.pagination.current_page);
                 }, (response) => {
                     this.formErrors = response.data;

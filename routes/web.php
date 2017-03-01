@@ -24,6 +24,7 @@ Route::group(['prefix' => 'admin'], function () {
     Route::get('login', 'Auth\AdminLoginController@showLoginForm')->name('admin.login');
     Route::post('login', 'Auth\AdminLoginController@login')->name('admin.login.post');
     Route::post('logout', 'Auth\AdminLoginController@logout')->name('admin.logout');
+
     Route::get('home', 'AdminController@index')->name('admin.home');
     Route::get('modules/business-types', 'AdminController@getBusinessType')->name('admin.modules.business-types');
     Route::get('modules/city-provinces', 'AdminController@getBusinessType')->name('admin.modules.business-types');

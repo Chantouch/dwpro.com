@@ -18,6 +18,12 @@ Route::middleware('auth:api')->get('/user', function (Request $request) {
 });
 
 Route::group(['middleware' => 'api'], function () {
-    Route::resource('administrator/modules/business-types', 'Administrator\Modules\BusinessTypeController');
-    Route::resource('administrator/modules/cities', 'Administrator\Modules\CityProvinceController');
+    Route::group(['prefix' => 'administrator'], function () {
+        Route::group(['prefix' => 'modules'], function () {
+            Route::resource('business-types', 'Administrator\Modules\BusinessTypeController');
+            Route::resource('cities', 'Administrator\Modules\CityProvinceController');
+            Route::resource('departments', 'Administrator\Modules\DepartmentController');
+            Route::resource('functions', 'Administrator\Modules\FunctionController');
+        });
+    });
 });
