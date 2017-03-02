@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Http\Controllers\Administrator\Modules;
+namespace App\Http\Controllers\Api;
 
 use App\Models\BusinessType;
 use Illuminate\Http\Request;
@@ -10,7 +10,6 @@ use DB;
 
 class BusinessTypeController extends Controller
 {
-
     private $business_type;
 
     /**
@@ -29,7 +28,8 @@ class BusinessTypeController extends Controller
      */
     public function index()
     {
-        return view('administrator.modules.business-type.index');
+        $business_type = $this->business_type->paginate(5);
+        return response()->json($business_type);
     }
 
     /**
@@ -39,7 +39,7 @@ class BusinessTypeController extends Controller
      */
     public function create()
     {
-        return view('administrator.modules.business-type.create');
+        //
     }
 
     /**
@@ -72,7 +72,7 @@ class BusinessTypeController extends Controller
      */
     public function show($id)
     {
-        return view('administrator.modules.business-type.show');
+        //
     }
 
     /**
@@ -83,7 +83,7 @@ class BusinessTypeController extends Controller
      */
     public function edit($id)
     {
-        return view('administrator.modules.business-type.edit');
+        //
     }
 
     /**

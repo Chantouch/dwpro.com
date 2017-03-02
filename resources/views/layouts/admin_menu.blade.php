@@ -15,31 +15,31 @@
         </a>
         <ul class="list-unstyled">
             <li>
-                <a href="{!! route('admin.modules.business-types') !!}">Business Types</a>
+                <a href="{!! route('admin.modules.business-types.index') !!}">Business Types</a>
             </li>
             <li>
-                <a href="#">Cities/Provinces</a>
+                <a href="{!! route('admin.modules.city-provinces') !!}">Cities/Provinces</a>
             </li>
             <li>
-                <a href="#">Departments</a>
+                <a href="{!! route('admin.modules.departments') !!}">Departments</a>
             </li>
             <li>
-                <a href="#">Functions</a>
+                <a href="{!! route('admin.modules.functions') !!}">Functions</a>
             </li>
             <li>
-                <a href="#">Industries</a>
+                <a href="{!! route('admin.modules.industries') !!}">Industries</a>
             </li>
             <li>
-                <a href="#">Qualifications</a>
+                <a href="{!! route('admin.modules.qualifications') !!}">Qualifications</a>
             </li>
             <li>
-                <a href="#">Levels</a>
+                <a href="{!! route('admin.modules.levels') !!}">Levels</a>
             </li>
             <li>
-                <a href="#">Languages</a>
+                <a href="{!! route('admin.modules.languages') !!}">Languages</a>
             </li>
             <li>
-                <a href="#">Positions</a>
+                <a href="{!! route('admin.modules.positions') !!}">Positions</a>
             </li>
         </ul>
     </li>

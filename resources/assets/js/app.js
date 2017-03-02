@@ -29,6 +29,8 @@ Vue.component('admin', require('./components/Admin.vue'));
 
 Vue.component('business-type', require('./components/modules/business-type/BusinessType.vue'));
 
+Vue.component('create-business-type', require('./components/modules/business-type/Create.vue'));
+
 Vue.component('city-province', require('./components/modules/CityProvince.vue'));
 
 Vue.component('department', require('./components/modules/Department.vue'));
@@ -40,6 +42,6 @@ const router = new VueRouter({
 
 const app = new Vue({
     el: '#app',
-    router,
-    render: h => h(App)
+    // router,
+    // render: h => h(App)
 });

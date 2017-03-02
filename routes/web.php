@@ -26,17 +26,18 @@ Route::group(['prefix' => 'admin'], function () {
     Route::post('logout', 'Auth\AdminLoginController@logout')->name('admin.logout');
 
     Route::get('home', 'AdminController@index')->name('admin.home');
-    Route::prefix('modules')->group(function () {
+    Route::prefix('modules')->name('admin.modules.')->group(function () {
 
-        Route::get('business-types', 'AdminController@getBusinessType')->name('admin.modules.business-types');
-        Route::get('city-provinces', 'AdminController@getCityProvince')->name('admin.modules.city-provinces');
-        Route::get('departments', 'AdminController@getDepartment')->name('admin.modules.departments');
-        Route::get('functions', 'AdminController@getFunction')->name('admin.modules.functions');
-        Route::get('industries', 'AdminController@getIndustry')->name('admin.modules.industries');
-        Route::get('qualifications', 'AdminController@getQualification')->name('admin.modules.qualifications');
-        Route::get('levels', 'AdminController@getLevel')->name('admin.modules.levels');
-        Route::get('languages', 'AdminController@getLanguage')->name('admin.modules.languages');
-        Route::get('positions', 'AdminController@getPosition')->name('admin.modules.positions');
+//        Route::get('business-types', 'AdminController@getBusinessType')->name('admin.modules.business-types');
+        Route::resource('business-types', 'Administrator\Modules\BusinessTypeController');
+        Route::get('city-provinces', 'AdminController@getCityProvince')->name('city-provinces');
+        Route::get('departments', 'AdminController@getDepartment')->name('departments');
+        Route::get('functions', 'AdminController@getFunction')->name('functions');
+        Route::get('industries', 'AdminController@getIndustry')->name('industries');
+        Route::get('qualifications', 'AdminController@getQualification')->name('qualifications');
+        Route::get('levels', 'AdminController@getLevel')->name('levels');
+        Route::get('languages', 'AdminController@getLanguage')->name('languages');
+        Route::get('positions', 'AdminController@getPosition')->name('positions');
 
     });
 });

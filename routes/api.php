@@ -20,7 +20,7 @@ Route::middleware('auth:api')->get('/user', function (Request $request) {
 Route::group(['middleware' => 'api'], function () {
     Route::group(['prefix' => 'administrator'], function () {
         Route::group(['prefix' => 'modules'], function () {
-            Route::resource('business-types', 'Administrator\Modules\BusinessTypeController');
+            Route::resource('business-types', 'Api\BusinessTypeController');
             Route::resource('cities', 'Administrator\Modules\CityProvinceController');
             Route::resource('departments', 'Administrator\Modules\DepartmentController');
             Route::resource('functions', 'Administrator\Modules\FunctionController');
