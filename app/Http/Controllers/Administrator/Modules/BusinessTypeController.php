@@ -61,7 +61,7 @@ class BusinessTypeController extends Controller
             DB::rollbackTransaction();
             return redirect()->back()->withInput()->with('error', 'We unable to process your request right now.');
         }
-        return $business_type;
+        return redirect()->route('admin.modules.business-types.index')->with('success', 'You data was saved.');
     }
 
     /**

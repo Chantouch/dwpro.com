@@ -11,46 +11,45 @@
             </div>
             <div class="col-sm-6">
                 <div class="pull-right">
-                    <button type="button" class="btn btn-success waves-effect waves-light" data-toggle="modal"
-                            data-target="#create-business-type">
+                    <a href="/admin/modules/business-types/create" class="btn btn-success waves-effect waves-light">
                         <i class="ti-plus"></i>
-                    </button>
+                    </a>
                 </div>
             </div>
         </div>
 
         <div class="p-20">
             <table class="table table-bordered m-0">
-                <thead>
-                <tr>
-                    <th>#</th>
-                    <th>Name</th>
-                    <th>Description</th>
-                    <th>Status</th>
-                    <th>Action</th>
-                </tr>
-                </thead>
-                <tbody>
-                <tr v-for="business in business_types">
-                    <td scope="row">{{ business.id }}</td>
-                    <td>{{ business.name }}</td>
-                    <td>{{ business.description }}</td>
-                    <td>{{ business.status }}</td>
-                    <td>
-                        <div class="btn-group">
-                            <button class="btn btn-default btn-xs waves-effect waves-light">
-                                <i class="glyphicon glyphicon-eye-open"></i></button>
-                            <button class="btn btn-default btn-xs waves-effect waves-light"
-                                    @click.prevent="editBusinessType(business)">
-                                <i class="glyphicon glyphicon-edit"></i></button>
-                            <button type="submit" class="btn btn-danger btn-xs waves-effect waves-light"
-                                    @click.prevent="deleteBusinessType(business)">
-                                <i class="glyphicon glyphicon-trash"></i></button>
-                        </div>
-                    </td>
-                </tr>
-                </tbody>
-            </table>
+            <thead>
+            <tr>
+                <th>#</th>
+                <th>Name</th>
+                <th>Description</th>
+                <th>Status</th>
+                <th>Action</th>
+            </tr>
+            </thead>
+            <tbody>
+            <tr v-for="business in business_types">
+                <td scope="row">{{ business.id }}</td>
+                <td>{{ business.name }}</td>
+                <td>{{ business.description }}</td>
+                <td>{{ business.status }}</td>
+                <td>
+                    <div class="btn-group">
+                        <button class="btn btn-default btn-xs waves-effect waves-light">
+                            <i class="glyphicon glyphicon-eye-open"></i></button>
+                        <button class="btn btn-default btn-xs waves-effect waves-light"
+                                @click.prevent="editBusinessType(business)">
+                            <i class="glyphicon glyphicon-edit"></i></button>
+                        <button type="submit" class="btn btn-danger btn-xs waves-effect waves-light"
+                                @click.prevent="deleteBusinessType(business)">
+                            <i class="glyphicon glyphicon-trash"></i></button>
+                    </div>
+                </td>
+            </tr>
+            </tbody>
+        </table>
 
             <!-- Pagination -->
             <nav>

@@ -244,13 +244,9 @@
                     };
                     $("#create-city-province").modal('hide');
                     toastr.success('City province created successfully.', 'Success Alert', {timeOut: 5000});
-                    this.fetchList();
                     this.changePage(this.pagination.current_page);
                 }, (response) => {
                     this.formErrors = response.data;
-                    console.log(response.data);
-                }).catch(error => {
-                    console.log(error.response.data);
                 });
             },
             updateCityProvince(id){

@@ -11218,7 +11218,7 @@ var Component = __webpack_require__(0)(
   /* cssModules */
   null
 )
-Component.options.__file = "D:\\Developments\\dwpro.com\\resources\\assets\\js\\components\\Admin.vue"
+Component.options.__file = "D:\\Developments\\Web\\dwpro.com\\resources\\assets\\js\\components\\Admin.vue"
 if (Component.esModule && Object.keys(Component.esModule).some(function (key) {return key !== "default" && key !== "__esModule"})) {console.error("named exports are not supported in *.vue files.")}
 if (Component.options.functional) {console.error("[vue-loader] Admin.vue: functional components are not supported with templates, they should use render functions.")}
 
@@ -11252,7 +11252,7 @@ var Component = __webpack_require__(0)(
   /* cssModules */
   null
 )
-Component.options.__file = "D:\\Developments\\dwpro.com\\resources\\assets\\js\\components\\modules\\CityProvince.vue"
+Component.options.__file = "D:\\Developments\\Web\\dwpro.com\\resources\\assets\\js\\components\\modules\\CityProvince.vue"
 if (Component.esModule && Object.keys(Component.esModule).some(function (key) {return key !== "default" && key !== "__esModule"})) {console.error("named exports are not supported in *.vue files.")}
 if (Component.options.functional) {console.error("[vue-loader] CityProvince.vue: functional components are not supported with templates, they should use render functions.")}
 
@@ -11286,7 +11286,7 @@ var Component = __webpack_require__(0)(
   /* cssModules */
   null
 )
-Component.options.__file = "D:\\Developments\\dwpro.com\\resources\\assets\\js\\components\\modules\\Department.vue"
+Component.options.__file = "D:\\Developments\\Web\\dwpro.com\\resources\\assets\\js\\components\\modules\\Department.vue"
 if (Component.esModule && Object.keys(Component.esModule).some(function (key) {return key !== "default" && key !== "__esModule"})) {console.error("named exports are not supported in *.vue files.")}
 if (Component.options.functional) {console.error("[vue-loader] Department.vue: functional components are not supported with templates, they should use render functions.")}
 
@@ -11320,7 +11320,7 @@ var Component = __webpack_require__(0)(
   /* cssModules */
   null
 )
-Component.options.__file = "D:\\Developments\\dwpro.com\\resources\\assets\\js\\components\\modules\\business-type\\BusinessType.vue"
+Component.options.__file = "D:\\Developments\\Web\\dwpro.com\\resources\\assets\\js\\components\\modules\\business-type\\BusinessType.vue"
 if (Component.esModule && Object.keys(Component.esModule).some(function (key) {return key !== "default" && key !== "__esModule"})) {console.error("named exports are not supported in *.vue files.")}
 if (Component.options.functional) {console.error("[vue-loader] BusinessType.vue: functional components are not supported with templates, they should use render functions.")}
 
@@ -22037,13 +22037,9 @@ var Errors = function () {
                 };
                 $("#create-city-province").modal('hide');
                 toastr.success('City province created successfully.', 'Success Alert', { timeOut: 5000 });
-                _this.fetchList();
                 _this.changePage(_this.pagination.current_page);
             }, function (response) {
                 _this.formErrors = response.data;
-                console.log(response.data);
-            }).catch(function (error) {
-                console.log(error.response.data);
             });
         },
         updateCityProvince: function updateCityProvince(id) {
@@ -22807,7 +22803,6 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 
 "use strict";
 /* WEBPACK VAR INJECTION */(function($) {Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
-//
 //
 //
 //
@@ -42910,7 +42905,7 @@ var Component = __webpack_require__(0)(
   /* cssModules */
   null
 )
-Component.options.__file = "D:\\Developments\\dwpro.com\\resources\\assets\\js\\App.vue"
+Component.options.__file = "D:\\Developments\\Web\\dwpro.com\\resources\\assets\\js\\App.vue"
 if (Component.esModule && Object.keys(Component.esModule).some(function (key) {return key !== "default" && key !== "__esModule"})) {console.error("named exports are not supported in *.vue files.")}
 if (Component.options.functional) {console.error("[vue-loader] App.vue: functional components are not supported with templates, they should use render functions.")}
 
@@ -42944,7 +42939,7 @@ var Component = __webpack_require__(0)(
   /* cssModules */
   null
 )
-Component.options.__file = "D:\\Developments\\dwpro.com\\resources\\assets\\js\\components\\Example.vue"
+Component.options.__file = "D:\\Developments\\Web\\dwpro.com\\resources\\assets\\js\\components\\Example.vue"
 if (Component.esModule && Object.keys(Component.esModule).some(function (key) {return key !== "default" && key !== "__esModule"})) {console.error("named exports are not supported in *.vue files.")}
 if (Component.options.functional) {console.error("[vue-loader] Example.vue: functional components are not supported with templates, they should use render functions.")}
 
@@ -42978,7 +42973,7 @@ var Component = __webpack_require__(0)(
   /* cssModules */
   null
 )
-Component.options.__file = "D:\\Developments\\dwpro.com\\resources\\assets\\js\\components\\Header.vue"
+Component.options.__file = "D:\\Developments\\Web\\dwpro.com\\resources\\assets\\js\\components\\Header.vue"
 if (Component.esModule && Object.keys(Component.esModule).some(function (key) {return key !== "default" && key !== "__esModule"})) {console.error("named exports are not supported in *.vue files.")}
 if (Component.options.functional) {console.error("[vue-loader] Header.vue: functional components are not supported with templates, they should use render functions.")}
 
@@ -43016,7 +43011,7 @@ var Component = __webpack_require__(0)(
   /* cssModules */
   null
 )
-Component.options.__file = "D:\\Developments\\dwpro.com\\resources\\assets\\js\\components\\Menu.vue"
+Component.options.__file = "D:\\Developments\\Web\\dwpro.com\\resources\\assets\\js\\components\\Menu.vue"
 if (Component.esModule && Object.keys(Component.esModule).some(function (key) {return key !== "default" && key !== "__esModule"})) {console.error("named exports are not supported in *.vue files.")}
 if (Component.options.functional) {console.error("[vue-loader] Menu.vue: functional components are not supported with templates, they should use render functions.")}
 
@@ -43050,7 +43045,7 @@ var Component = __webpack_require__(0)(
   /* cssModules */
   null
 )
-Component.options.__file = "D:\\Developments\\dwpro.com\\resources\\assets\\js\\components\\modules\\Function.vue"
+Component.options.__file = "D:\\Developments\\Web\\dwpro.com\\resources\\assets\\js\\components\\modules\\Function.vue"
 if (Component.esModule && Object.keys(Component.esModule).some(function (key) {return key !== "default" && key !== "__esModule"})) {console.error("named exports are not supported in *.vue files.")}
 if (Component.options.functional) {console.error("[vue-loader] Function.vue: functional components are not supported with templates, they should use render functions.")}
 
@@ -43084,7 +43079,7 @@ var Component = __webpack_require__(0)(
   /* cssModules */
   null
 )
-Component.options.__file = "D:\\Developments\\dwpro.com\\resources\\assets\\js\\components\\modules\\Industry.vue"
+Component.options.__file = "D:\\Developments\\Web\\dwpro.com\\resources\\assets\\js\\components\\modules\\Industry.vue"
 if (Component.esModule && Object.keys(Component.esModule).some(function (key) {return key !== "default" && key !== "__esModule"})) {console.error("named exports are not supported in *.vue files.")}
 if (Component.options.functional) {console.error("[vue-loader] Industry.vue: functional components are not supported with templates, they should use render functions.")}
 
@@ -43118,7 +43113,7 @@ var Component = __webpack_require__(0)(
   /* cssModules */
   null
 )
-Component.options.__file = "D:\\Developments\\dwpro.com\\resources\\assets\\js\\components\\modules\\Language.vue"
+Component.options.__file = "D:\\Developments\\Web\\dwpro.com\\resources\\assets\\js\\components\\modules\\Language.vue"
 if (Component.esModule && Object.keys(Component.esModule).some(function (key) {return key !== "default" && key !== "__esModule"})) {console.error("named exports are not supported in *.vue files.")}
 if (Component.options.functional) {console.error("[vue-loader] Language.vue: functional components are not supported with templates, they should use render functions.")}
 
@@ -43152,7 +43147,7 @@ var Component = __webpack_require__(0)(
   /* cssModules */
   null
 )
-Component.options.__file = "D:\\Developments\\dwpro.com\\resources\\assets\\js\\components\\modules\\Level.vue"
+Component.options.__file = "D:\\Developments\\Web\\dwpro.com\\resources\\assets\\js\\components\\modules\\Level.vue"
 if (Component.esModule && Object.keys(Component.esModule).some(function (key) {return key !== "default" && key !== "__esModule"})) {console.error("named exports are not supported in *.vue files.")}
 if (Component.options.functional) {console.error("[vue-loader] Level.vue: functional components are not supported with templates, they should use render functions.")}
 
@@ -43186,7 +43181,7 @@ var Component = __webpack_require__(0)(
   /* cssModules */
   null
 )
-Component.options.__file = "D:\\Developments\\dwpro.com\\resources\\assets\\js\\components\\modules\\Position.vue"
+Component.options.__file = "D:\\Developments\\Web\\dwpro.com\\resources\\assets\\js\\components\\modules\\Position.vue"
 if (Component.esModule && Object.keys(Component.esModule).some(function (key) {return key !== "default" && key !== "__esModule"})) {console.error("named exports are not supported in *.vue files.")}
 if (Component.options.functional) {console.error("[vue-loader] Position.vue: functional components are not supported with templates, they should use render functions.")}
 
@@ -43220,7 +43215,7 @@ var Component = __webpack_require__(0)(
   /* cssModules */
   null
 )
-Component.options.__file = "D:\\Developments\\dwpro.com\\resources\\assets\\js\\components\\modules\\Qualification.vue"
+Component.options.__file = "D:\\Developments\\Web\\dwpro.com\\resources\\assets\\js\\components\\modules\\Qualification.vue"
 if (Component.esModule && Object.keys(Component.esModule).some(function (key) {return key !== "default" && key !== "__esModule"})) {console.error("named exports are not supported in *.vue files.")}
 if (Component.options.functional) {console.error("[vue-loader] Qualification.vue: functional components are not supported with templates, they should use render functions.")}
 
@@ -43254,7 +43249,7 @@ var Component = __webpack_require__(0)(
   /* cssModules */
   null
 )
-Component.options.__file = "D:\\Developments\\dwpro.com\\resources\\assets\\js\\components\\modules\\business-type\\Create.vue"
+Component.options.__file = "D:\\Developments\\Web\\dwpro.com\\resources\\assets\\js\\components\\modules\\business-type\\Create.vue"
 if (Component.esModule && Object.keys(Component.esModule).some(function (key) {return key !== "default" && key !== "__esModule"})) {console.error("named exports are not supported in *.vue files.")}
 if (Component.options.functional) {console.error("[vue-loader] Create.vue: functional components are not supported with templates, they should use render functions.")}
 
@@ -43577,12 +43572,10 @@ module.exports={render:function (){var _vm=this;var _h=_vm.$createElement;var _c
     staticClass: "col-sm-6"
   }, [_c('div', {
     staticClass: "pull-right"
-  }, [_c('button', {
+  }, [_c('a', {
     staticClass: "btn btn-success waves-effect waves-light",
     attrs: {
-      "type": "button",
-      "data-toggle": "modal",
-      "data-target": "#create-business-type"
+      "href": "/admin/modules/business-types/create"
     }
   }, [_c('i', {
     staticClass: "ti-plus"

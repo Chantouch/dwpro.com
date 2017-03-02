@@ -3,7 +3,7 @@
     <link href="//cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/css/toastr.min.css" rel="stylesheet">
 @stop
 @section('content')
-    <div class="row">
+    <div class="row" id="business">
         <div class="col-sm-12">
             <div class="card-box">
                 <div class="row">
