@@ -53,7 +53,24 @@
                 <a href="#">All</a>
             </li>
             <li>
-                <a href="#">UnActive</a>
+                <a href="#">InActive</a>
+            </li>
+        </ul>
+    </li>
+
+    <li class="has_sub">
+        <a href="#" class="waves-effect waves-light"><i class="ti-home"></i>
+            <span>Candidate</span>
+        </a>
+        <ul class="list-unstyled">
+            <li>
+                <a href="#">All</a>
+            </li>
+            <li>
+                <a href="#">Approved</a>
+            </li>
+            <li>
+                <a href="#">UnApproved</a>
             </li>
         </ul>
     </li>

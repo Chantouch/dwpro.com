@@ -35,6 +35,8 @@ Vue.component('city-province', require('./components/modules/CityProvince.vue'))
 
 Vue.component('department', require('./components/modules/Department.vue'));
 
+Vue.component('industry', require('./components/modules/Industry.vue'));
+
 const router = new VueRouter({
     mode: 'history',
     routes

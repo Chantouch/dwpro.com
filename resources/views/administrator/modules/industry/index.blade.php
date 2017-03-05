@@ -7,7 +7,7 @@
         <div class="col-sm-12">
             <div class="card-box">
                 <div class="row">
-                    <department></department>
+                    <industry></industry>
                 </div>
             </div>
         </div>

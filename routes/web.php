@@ -29,6 +29,7 @@ Route::group(['prefix' => 'admin'], function () {
     Route::prefix('modules')->name('admin.modules.')->middleware('auth:admin')->group(function () {
 
         Route::resource('business-types', 'Administrator\Modules\BusinessTypeController');
+        Route::resource('industries', 'Administrator\Modules\IndustryController');
         Route::get('city-provinces', 'AdminController@getCityProvince')->name('city-provinces');
         Route::get('departments', 'AdminController@getDepartment')->name('departments');
         Route::get('functions', 'AdminController@getFunction')->name('functions');
